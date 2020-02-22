@@ -1,7 +1,7 @@
-package es.diegogargallotarin.gula.data.repository
+package es.diegogargallotarin.gula.model.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
-import es.diegogargallotarin.gula.data.entity.Dish
+import es.diegogargallotarin.gula.model.entity.Dish
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 

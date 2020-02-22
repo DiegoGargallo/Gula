@@ -1,10 +1,11 @@
-package es.diegogargallotarin.gula
+package es.diegogargallotarin.gula.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import es.diegogargallotarin.gula.data.entity.Dish
+import es.diegogargallotarin.gula.R
+import es.diegogargallotarin.gula.model.entity.Dish
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

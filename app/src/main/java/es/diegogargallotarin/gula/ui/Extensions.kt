@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula
+package es.diegogargallotarin.gula.ui
 
 import android.content.Context
 import android.view.LayoutInflater

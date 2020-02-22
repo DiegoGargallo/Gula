@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.data.entity
+package es.diegogargallotarin.gula.model.entity
 
 import com.google.common.base.Ascii.toLowerCase
 import com.google.firebase.firestore.IgnoreExtraProperties
