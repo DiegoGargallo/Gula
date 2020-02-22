@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
                 val dishes = mutableListOf<Dish>()
                 for (document in result) {
                     Log.d("TAG", "${document.id} => ${document.data}")
-                    dishes.add(Dish(document.data["name"].toString()))
+                    val dish = document.toObject(Dish::class.java)
+                    dishes.add(dish)
                 }
                 adapter.dishes = dishes
             }

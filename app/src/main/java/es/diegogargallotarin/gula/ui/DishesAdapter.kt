@@ -39,6 +39,7 @@ class DishesAdapter : RecyclerView.Adapter<DishesAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(dish: Dish) {
             itemView.dishTitle.text = dish.name
+            itemView.dishImage.loadUrl(dish.photos[0])
         }
     }
 }
