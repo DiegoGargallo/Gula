@@ -1,19 +1,10 @@
 package es.diegogargallotarin.gula.model.entity
 
+import android.os.Parcelable
 import com.google.common.base.Ascii.toLowerCase
-import com.google.firebase.firestore.IgnoreExtraProperties
+import kotlinx.android.parcel.Parcelize
 
-@IgnoreExtraProperties
+@Parcelize
 class Dish(var name: String? = null,
-              var description: String? = null,
-              var photos: List<String> = emptyList()) {
-
-    val id: String
-        get() {
-            return name?.let { s ->
-                s.split(' ').joinToString("_") {
-                    toLowerCase(it)
-                }
-            } ?: ""
-        }
-}
+           var description: String? = null,
+           var photos: List<String> = emptyList()) : Parcelable

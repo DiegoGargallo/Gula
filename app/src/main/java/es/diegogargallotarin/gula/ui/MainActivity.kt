@@ -10,7 +10,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter = DishesAdapter()
+    private val adapter = DishesAdapter {
+        startActivity<DetailActivity> {
+            putExtra(DetailActivity.DISH, it)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

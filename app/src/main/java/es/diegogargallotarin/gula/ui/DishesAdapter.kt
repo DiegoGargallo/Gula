@@ -9,12 +9,13 @@ import es.diegogargallotarin.gula.model.entity.Dish
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_dish.view.*
 
-class DishesAdapter : RecyclerView.Adapter<DishesAdapter.ViewHolder>() {
+class DishesAdapter(private val listener: (Dish) -> Unit) :
+        RecyclerView.Adapter<DishesAdapter.ViewHolder>() {
 
-    var dishes: List<Dish> by Delegates.observable(emptyList()) { _, old, new ->
+        var dishes: List<Dish> by Delegates.observable(emptyList()) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                old[oldItemPosition].id == new[newItemPosition].id
+                old[oldItemPosition].name == new[newItemPosition].name
 
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
                 old[oldItemPosition] == new[newItemPosition]
@@ -33,7 +34,9 @@ class DishesAdapter : RecyclerView.Adapter<DishesAdapter.ViewHolder>() {
     override fun getItemCount(): Int = dishes.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dishes[position])
+        val dish = dishes[position]
+        holder.bind(dish)
+        holder.itemView.setOnClickListener { listener(dish) }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
