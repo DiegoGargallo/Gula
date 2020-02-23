@@ -6,13 +6,13 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
 
-class Repository {
+class DishesRepository {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     suspend fun getDishes(): MutableList<Dish> = suspendCancellableCoroutine { continuation ->
         val dishes = mutableListOf<Dish>()
-        fireStore.collection("users").get().addOnCompleteListener {
+        fireStore.collection("dishes").get().addOnCompleteListener {
             if (it.isSuccessful && it.result != null) {
                 for (document in it.result!!.documents) {
                     dishes.add(document.toObject(Dish::class.java)!!)
