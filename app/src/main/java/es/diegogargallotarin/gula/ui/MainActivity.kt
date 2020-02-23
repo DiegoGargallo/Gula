@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         recycler.adapter = adapter
 
-        db.collection("platos")
+        db.collection("dishes")
             .get()
             .addOnSuccessListener { result ->
                 val dishes = mutableListOf<Dish>()

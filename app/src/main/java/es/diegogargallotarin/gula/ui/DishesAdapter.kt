@@ -42,7 +42,7 @@ class DishesAdapter(private val listener: (Dish) -> Unit) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(dish: Dish) {
             itemView.dishTitle.text = dish.name
-            itemView.dishImage.loadUrl(dish.photos[0])
+            dish.contributions[0].photo?.let { itemView.dishImage.loadUrl(it) }
         }
     }
 }

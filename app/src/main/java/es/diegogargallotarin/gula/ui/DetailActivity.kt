@@ -7,9 +7,7 @@ import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.entity.Dish
 import kotlinx.android.synthetic.main.activity_detail.*
 
-
 class DetailActivity : AppCompatActivity() {
-
     companion object {
         const val DISH = "DetailActivity:dish"
     }
@@ -21,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
 
         with(intent.getParcelableExtra<Dish>(DISH)) {
             movieDetailToolbar.title = title
-            movieDetailImage.loadUrl(photos[0])
+            contributions[0].photo?.let { movieDetailImage.loadUrl(it) }
 
             movieDetailSummary.text = description
         }

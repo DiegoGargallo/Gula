@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 class Dish(var name: String? = null,
            var description: String? = null,
-           var photos: List<String> = emptyList()) : Parcelable
+           var contributions: List<Contribution> = emptyList()) : Parcelable
