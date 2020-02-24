@@ -18,10 +18,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         with(intent.getParcelableExtra<Dish>(DISH)) {
-            movieDetailToolbar.title = title
-            contributions[0].photo?.let { movieDetailImage.loadUrl(it) }
+            dishDetailToolbar.title = title
+            contributions[0].photo?.let { dishDetailImage.loadUrl(it) }
 
-            movieDetailSummary.text = description
+            dishDetailSummary.text = description
+            dishDetailInfo.setDish(this)
         }
     }
 }

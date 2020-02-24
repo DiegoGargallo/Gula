@@ -20,7 +20,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/movieDetailImage"
+                android:id="@+id/dishDetailImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -29,10 +29,10 @@
                 tools:src="@mipmap/ic_launcher" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/movieDetailToolbar"
+                android:id="@+id/dishDetailToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Movie name" />
+                app:title="Dish name" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -50,15 +50,15 @@
             android:transitionGroup="true">
 
             <TextView
-                android:id="@+id/movieDetailSummary"
+                android:id="@+id/dishDetailSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="Lorem ipsum" />
 
-            <TextView
-                android:id="@+id/movieDetailInfo"
+            <es.diegogargallotarin.gula.ui.DishDetailInfoView
+                android:id="@+id/dishDetailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
