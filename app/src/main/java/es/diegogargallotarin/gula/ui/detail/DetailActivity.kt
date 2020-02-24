@@ -1,10 +1,11 @@
-package es.diegogargallotarin.gula.ui
+package es.diegogargallotarin.gula.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.entity.Dish
+import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {

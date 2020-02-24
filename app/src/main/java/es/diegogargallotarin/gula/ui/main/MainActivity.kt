@@ -1,9 +1,12 @@
-package es.diegogargallotarin.gula.ui
+package es.diegogargallotarin.gula.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.repository.DishesRepository
+import es.diegogargallotarin.gula.ui.common.startActivity
+import es.diegogargallotarin.gula.ui.detail.DetailActivity
+import es.diegogargallotarin.gula.ui.main.DishesAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

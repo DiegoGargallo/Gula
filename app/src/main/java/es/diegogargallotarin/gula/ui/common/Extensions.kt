@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.ui
+package es.diegogargallotarin.gula.ui.common
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.ui
+package es.diegogargallotarin.gula.ui.main
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.entity.Dish
+import es.diegogargallotarin.gula.ui.common.inflate
+import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_dish.view.*
 

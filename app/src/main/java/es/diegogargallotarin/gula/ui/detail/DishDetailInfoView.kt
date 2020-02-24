@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.ui
+package es.diegogargallotarin.gula.ui.detail
 
 import android.content.Context
 import android.util.AttributeSet
