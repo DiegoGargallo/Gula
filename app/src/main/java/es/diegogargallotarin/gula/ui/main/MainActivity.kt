@@ -3,49 +3,42 @@ package es.diegogargallotarin.gula.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import es.diegogargallotarin.gula.R
-import es.diegogargallotarin.gula.model.entity.Dish
 import es.diegogargallotarin.gula.model.repository.DishesRepository
 import es.diegogargallotarin.gula.ui.common.startActivity
 import es.diegogargallotarin.gula.ui.detail.DetailActivity
-import es.diegogargallotarin.gula.ui.main.DishesAdapter
+import es.diegogargallotarin.gula.ui.main.MainViewModel.UiModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), MainPresenter.View {
+class MainActivity : AppCompatActivity() {
 
-    private val presenter by lazy { MainPresenter(DishesRepository()) }
-    private val adapter = DishesAdapter(presenter::onMovieClicked)
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: DishesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter.onCreate(this)
+
+        viewModel = ViewModelProviders.of(
+            this,
+            MainViewModelFactory(DishesRepository())
+        )[MainViewModel::class.java]
+
+        adapter = DishesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter
+        viewModel.model.observe(this, Observer(::updateUi))
     }
 
-    override fun onDestroy() {
-        presenter.onDestroy()
-        super.onDestroy()
-    }
+    private fun updateUi(model: UiModel) {
+        progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
 
-    override fun showProgress() {
-        progress.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        progress.visibility = View.GONE
-    }
-
-    override fun updateData(dishes: List<Dish>) {
-        adapter.dishes = dishes
-    }
-
-    override fun navigateTo(dish: Dish) {
-        startActivity<DetailActivity> {
-            putExtra(DetailActivity.DISH, dish)
+        when (model) {
+            is UiModel.Content -> adapter.dishes = model.dishes
+            is UiModel.Navigation -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.DISH, model.dish)
+            }
         }
     }
 }
