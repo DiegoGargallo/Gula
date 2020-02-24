@@ -2,6 +2,7 @@ package es.diegogargallotarin.gula.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.repository.DishesRepository
 import es.diegogargallotarin.gula.ui.common.startActivity
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = adapter
 
         GlobalScope.launch(Dispatchers.Main){
+            progress.visibility = View.VISIBLE
             adapter.dishes = repository.getDishes()
+            progress.visibility = View.GONE
         }
     }
 }
