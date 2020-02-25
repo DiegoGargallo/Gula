@@ -3,9 +3,8 @@ package es.diegogargallotarin.gula.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import es.diegogargallotarin.gula.model.entity.Dish
-import es.diegogargallotarin.gula.model.repository.DishesRepository
+import es.diegogargallotarin.gula.model.server.repository.DishesRepository
 import es.diegogargallotarin.gula.ui.common.Scope
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.model.repository
+package es.diegogargallotarin.gula.model.server.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import es.diegogargallotarin.gula.model.entity.Dish

@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import es.diegogargallotarin.gula.R
-import es.diegogargallotarin.gula.model.repository.DishesRepository
+import es.diegogargallotarin.gula.model.server.repository.DishesRepository
 import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.startActivity
 import es.diegogargallotarin.gula.ui.detail.DetailActivity
