@@ -18,10 +18,3 @@ class DetailViewModel(private val dish: Dish) : ViewModel() {
             return _model
         }
 }
-
-@Suppress("UNCHECKED_CAST")
-class DetailViewModelFactory(private val dish: Dish) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        DetailViewModel(dish) as T
-}

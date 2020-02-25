@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.entity.Dish
+import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -22,10 +23,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        viewModel = ViewModelProviders.of(
-            this,
-            DetailViewModelFactory(intent.getParcelableExtra(DISH))
-        )[DetailViewModel::class.java]
+        viewModel = getViewModel { DetailViewModel(intent.getParcelableExtra(DISH)) }
 
         viewModel.model.observe(this, Observer(::updateUi))
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.repository.DishesRepository
+import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.startActivity
 import es.diegogargallotarin.gula.ui.detail.DetailActivity
 import es.diegogargallotarin.gula.ui.main.MainViewModel.UiModel
@@ -21,10 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(
-            this,
-            MainViewModelFactory(DishesRepository())
-        )[MainViewModel::class.java]
+        viewModel = getViewModel { MainViewModel(DishesRepository()) }
 
         adapter = DishesAdapter(viewModel::onMovieClicked)
         recycler.adapter = adapter

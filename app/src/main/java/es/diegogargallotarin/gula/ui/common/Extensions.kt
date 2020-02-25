@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 
 fun Context.toast(message: String) {
@@ -28,4 +32,18 @@ inline fun <reified T : Activity> Context.intentFor(body: Intent.() -> Unit): In
 
 inline fun <reified T : Activity> Context.startActivity(body: Intent.() -> Unit) {
     startActivity(intentFor<T>(body))
+}
+
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(): T {
+    return ViewModelProviders.of(this)[T::class.java]
+}
+
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(crossinline factory: () -> T): T {
+
+    val vmFactory = object : ViewModelProvider.Factory {
+        override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
+    }
+
+    return ViewModelProviders.of(this, vmFactory)[T::class.java]
 }

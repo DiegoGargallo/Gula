@@ -45,10 +45,3 @@ class MainViewModel(private val dishesRepository: DishesRepository) : ViewModel(
         super.onCleared()
     }
 }
-
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(private val dishesRepository: DishesRepository) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        MainViewModel(dishesRepository) as T
-}
