@@ -11,11 +11,14 @@ interface  ContributionDao {
     @Query("SELECT * FROM Contribution WHERE id = :id")
     fun findById(id: Int): Contribution
 
+    @Query("SELECT * FROM Contribution WHERE dishId = :name")
+    fun findContributionsByDishName(name: String): List<Contribution>
+
     @Query("SELECT COUNT(id) FROM Contribution")
     fun contributionCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertContributions(restaurants: List<Contribution>)
+    fun insertContributions(contributions: List<Contribution>)
 
     @Update
     fun updateContribution(contribution: Contribution)

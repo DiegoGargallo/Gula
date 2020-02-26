@@ -8,14 +8,23 @@ interface  DishDao {
     @Query("SELECT * FROM Dish")
     fun getAll(): List<Dish>
 
-    @Query("SELECT * FROM Dish WHERE id = :id")
-    fun findById(id: Int): Dish
+    @Query("SELECT * FROM Dish WHERE name = :name")
+    fun findByName(name: String): Dish
 
-    @Query("SELECT COUNT(id) FROM Dish")
+    @Query("SELECT COUNT(name) FROM Dish")
     fun dishCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertDishes(restaurants: List<Dish>)
+    fun insertDishes(dishes: List<Dish>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertContributions(contributions: List<Contribution>)
+
+    @Transaction
+    fun insertAll(dishes: List<Dish>, contributions: List<Contribution>) {
+        insertDishes(dishes)
+        insertContributions(contributions)
+    }
 
     @Update
     fun updateDish(dish: Dish)

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import es.diegogargallotarin.gula.R
-import es.diegogargallotarin.gula.model.entity.Dish
+import es.diegogargallotarin.gula.model.database.Dish
 import es.diegogargallotarin.gula.ui.common.inflate
 import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlin.properties.Delegates
@@ -44,7 +44,7 @@ class DishesAdapter(private val listener: (Dish) -> Unit) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(dish: Dish) {
             itemView.dishTitle.text = dish.name
-            dish.contributions[0].photo?.let { itemView.dishImage.loadUrl(it) }
+            dish.photo?.let { itemView.dishImage.loadUrl(it) }
         }
     }
 }

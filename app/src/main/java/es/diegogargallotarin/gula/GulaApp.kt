@@ -7,13 +7,13 @@ import es.diegogargallotarin.gula.model.database.GulaDatabase
 
 class GulaApp : Application() {
 
-    lateinit var dbRestaurants: GulaDatabase
+    lateinit var db: GulaDatabase
         private set
 
     override fun onCreate() {
         super.onCreate()
 
-        dbRestaurants = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             this,
             GulaDatabase::class.java, "restaurant-db"
         ).build()

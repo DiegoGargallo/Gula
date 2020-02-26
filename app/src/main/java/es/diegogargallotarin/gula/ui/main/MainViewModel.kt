@@ -2,14 +2,12 @@ package es.diegogargallotarin.gula.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import es.diegogargallotarin.gula.model.entity.Dish
-import es.diegogargallotarin.gula.model.server.repository.DishesRepository
-import es.diegogargallotarin.gula.ui.common.Scope
+import es.diegogargallotarin.gula.model.database.Dish
+import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.ui.common.ScopedViewModel
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val dishesRepository: DishesRepository) : ViewModel(),
-    Scope by Scope.Impl() {
+class MainViewModel(private val gulaRepository: GulaRepository) : ScopedViewModel() {
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
@@ -31,11 +29,11 @@ class MainViewModel(private val dishesRepository: DishesRepository) : ViewModel(
     private fun refresh() {
         launch {
             _model.value = UiModel.Loading
-            _model.value = UiModel.Content(dishesRepository.getDishes())
+            _model.value = UiModel.Content(gulaRepository.getAllDishes())
         }
     }
 
-    fun onMovieClicked(dish: Dish) {
+    fun onDishClicked(dish: Dish) {
         _model.value = UiModel.Navigation(dish)
     }
 

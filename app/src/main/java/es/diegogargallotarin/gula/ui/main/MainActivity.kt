@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import es.diegogargallotarin.gula.R
-import es.diegogargallotarin.gula.model.server.repository.DishesRepository
+import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.ui.common.app
 import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.startActivity
 import es.diegogargallotarin.gula.ui.detail.DetailActivity
@@ -21,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = getViewModel { MainViewModel(DishesRepository()) }
+        viewModel = getViewModel { MainViewModel(GulaRepository(app)) }
 
-        adapter = DishesAdapter(viewModel::onMovieClicked)
+        adapter = DishesAdapter(viewModel::onDishClicked)
         recycler.adapter = adapter
         viewModel.model.observe(this, Observer(::updateUi))
     }
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         when (model) {
             is UiModel.Content -> adapter.dishes = model.dishes
             is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.DISH, model.dish)
+                putExtra(DetailActivity.DISH, model.dish.name)
             }
         }
     }

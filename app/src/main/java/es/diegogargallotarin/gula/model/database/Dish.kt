@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Dish(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    var name: String? = null,
-    var description: String? = null
+    @PrimaryKey var name: String,
+    var description: String? = null,
+    var photo: String? = null
 )

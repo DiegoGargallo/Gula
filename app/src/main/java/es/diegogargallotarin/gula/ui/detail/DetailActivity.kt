@@ -7,6 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.model.entity.Dish
+import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.ui.common.app
 import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -23,15 +25,15 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        viewModel = getViewModel { DetailViewModel(intent.getParcelableExtra(DISH)) }
+        viewModel = getViewModel { DetailViewModel(intent.getStringExtra(DISH), GulaRepository(app)) }
 
         viewModel.model.observe(this, Observer(::updateUi))
     }
 
-    private fun updateUi(model: DetailViewModel.UiModel) = with(model.dish) {
+    private fun updateUi(model: DetailViewModel.UiModel) = with(model) {
         dishDetailToolbar.title = title
-        contributions[0].photo?.let { dishDetailImage.loadUrl(it) }
-        dishDetailSummary.text = description
-        dishDetailInfo.setDish(this)
+        dish.photo?.let { dishDetailImage.loadUrl(it) }
+        dishDetailSummary.text = dish.description
+        dishDetailInfo.setContributions(contributions)
     }
 }
