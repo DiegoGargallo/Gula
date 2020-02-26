@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.databinding.FragmentDetailBinding
 import es.diegogargallotarin.gula.model.server.repository.GulaRepository
@@ -17,6 +18,7 @@ class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
     private var binding: FragmentDetailBinding? = null
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +31,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = getViewModel {
-            DetailViewModel(arguments?.getString("name") ?: "", GulaRepository(app))
+            DetailViewModel(args.name, GulaRepository(app))
         }
 
         binding?.apply {

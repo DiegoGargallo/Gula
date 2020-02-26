@@ -41,10 +41,8 @@ class MainFragment : Fragment() {
         viewModel = getViewModel { MainViewModel(GulaRepository(app)) }
 
         viewModel.navigateToDish.observe(viewLifecycleOwner, EventObserver { name ->
-            navController.navigate(
-                R.id.action_mainFragment_to_detailFragment,
-                bundleOf("name" to name)
-            )
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(name)
+            navController.navigate(action)
         })
 
         adapter = DishesAdapter(viewModel::onDishClicked)

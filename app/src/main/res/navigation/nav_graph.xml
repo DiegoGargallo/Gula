@@ -23,8 +23,7 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>
