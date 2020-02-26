@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import es.diegogargallotarin.gula.R
+import es.diegogargallotarin.gula.databinding.ViewDishBinding
 import es.diegogargallotarin.gula.model.database.Dish
-import es.diegogargallotarin.gula.ui.common.inflate
+import es.diegogargallotarin.gula.ui.common.bindingInflate
 import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlin.properties.Delegates
 import kotlinx.android.synthetic.main.view_dish.view.*
@@ -28,23 +29,17 @@ class DishesAdapter(private val listener: (Dish) -> Unit) :
         }).dispatchUpdatesTo(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.view_dish, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(parent.bindingInflate(R.layout.view_dish, false))
+
 
     override fun getItemCount(): Int = dishes.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dish = dishes[position]
-        holder.bind(dish)
+        holder.dataBinding.dish = dish
         holder.itemView.setOnClickListener { listener(dish) }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(dish: Dish) {
-            itemView.dishTitle.text = dish.name
-            dish.photo?.let { itemView.dishImage.loadUrl(it) }
-        }
-    }
+    class ViewHolder(val dataBinding: ViewDishBinding) : RecyclerView.ViewHolder(dataBinding.root)
 }
