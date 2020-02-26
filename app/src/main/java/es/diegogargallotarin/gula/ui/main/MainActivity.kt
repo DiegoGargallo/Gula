@@ -2,16 +2,15 @@ package es.diegogargallotarin.gula.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import es.diegogargallotarin.gula.R
+import es.diegogargallotarin.gula.databinding.ActivityMainBinding
 import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.ui.common.EventObserver
 import es.diegogargallotarin.gula.ui.common.app
 import es.diegogargallotarin.gula.ui.common.getViewModel
 import es.diegogargallotarin.gula.ui.common.startActivity
 import es.diegogargallotarin.gula.ui.detail.DetailActivity
-import es.diegogargallotarin.gula.ui.main.MainViewModel.UiModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,23 +19,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         viewModel = getViewModel { MainViewModel(GulaRepository(app)) }
 
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
+
         adapter = DishesAdapter(viewModel::onDishClicked)
-        recycler.adapter = adapter
-        viewModel.model.observe(this, Observer(::updateUi))
-    }
+        binding.recycler.adapter = adapter
 
-    private fun updateUi(model: UiModel) {
-        progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
-
-        when (model) {
-            is UiModel.Content -> adapter.dishes = model.dishes
-            is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.DISH, model.dish.name)
+        viewModel.navigateToDish.observe(this, EventObserver { name ->
+            startActivity<DetailActivity> {
+                putExtra(DetailActivity.DISH, name)
             }
-        }
+        })
     }
 }

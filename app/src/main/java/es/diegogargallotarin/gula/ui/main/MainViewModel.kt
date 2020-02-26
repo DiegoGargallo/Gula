@@ -4,37 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import es.diegogargallotarin.gula.model.database.Dish
 import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.ui.common.Event
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val gulaRepository: GulaRepository) : ScopedViewModel() {
 
-    private val _model = MutableLiveData<UiModel>()
-    val model: LiveData<UiModel>
-        get() {
-            if (_model.value == null) refresh()
-            return _model
-        }
+    private val _dishes = MutableLiveData<List<Dish>>()
+    val dishes: LiveData<List<Dish>> get() = _dishes
 
-    sealed class UiModel {
-        object Loading : UiModel()
-        class Content(val dishes: List<Dish>) : UiModel()
-        class Navigation(val dish: Dish) : UiModel()
-    }
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
+    private val _navigateToDish = MutableLiveData<Event<String>>()
+    val navigateToDish: LiveData<Event<String>> get() = _navigateToDish
 
     init {
         initScope()
+        refresh()
+    }
+
+    fun onDishClicked(dish: Dish) {
+        _navigateToDish.value = Event(dish.name)
     }
 
     private fun refresh() {
         launch {
-            _model.value = UiModel.Loading
-            _model.value = UiModel.Content(gulaRepository.getAllDishes())
+            _loading.value = true
+            _dishes.value = gulaRepository.getAllDishes()
+            _loading.value = false
         }
-    }
-
-    fun onDishClicked(dish: Dish) {
-        _model.value = UiModel.Navigation(dish)
     }
 
     override fun onCleared() {
