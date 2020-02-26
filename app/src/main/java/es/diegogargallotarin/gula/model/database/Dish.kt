@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Dish(
     @PrimaryKey var name: String,
     var description: String? = null,
-    var photo: String? = null
+    var photo: String? = null,
+    var favorite: Boolean
 )

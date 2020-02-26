@@ -27,4 +27,12 @@ class DetailViewModel(private val dishName: String, private val gulaRepository: 
             _model.value = UiModel(gulaRepository.findDishByName(dishName), gulaRepository.findContributionsByDishName(dishName))
         }
     }
+
+    fun onFavoriteClicked() = launch {
+        _model.value?.dish?.let {
+            val updatedDish = it.copy(favorite = !it.favorite)
+            _model.value= _model.value?.contributions?.let { it1 -> UiModel(updatedDish, it1) }
+            gulaRepository.update(updatedDish)
+        }
+    }
 }

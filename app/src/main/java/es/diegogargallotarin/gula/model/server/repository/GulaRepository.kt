@@ -63,12 +63,17 @@ class GulaRepository(application: GulaApp) {
     suspend fun findContributionsByDishName(name: String): List<DbContribution> = withContext(Dispatchers.IO) {
         db.contributionDao().findContributionsByDishName(name)
     }
+
+    suspend fun update(dish: DbDish) = withContext(Dispatchers.IO) {
+        db.dishDao().updateDish(dish)
+    }
 }
 
 private fun ServerDish.convertToDbDish() = DbDish(
     this.name,
     description,
-    contributions[0].photo
+    contributions[0].photo,
+    false
 )
 
 private fun getContributionList(dish: ServerDish): MutableList<DbContribution>{

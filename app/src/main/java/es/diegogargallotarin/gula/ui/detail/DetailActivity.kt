@@ -28,6 +28,8 @@ class DetailActivity : AppCompatActivity() {
         viewModel = getViewModel { DetailViewModel(intent.getStringExtra(DISH), GulaRepository(app)) }
 
         viewModel.model.observe(this, Observer(::updateUi))
+
+        movieDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
     }
 
     private fun updateUi(model: DetailViewModel.UiModel) = with(model) {
@@ -35,5 +37,8 @@ class DetailActivity : AppCompatActivity() {
         dish.photo?.let { dishDetailImage.loadUrl(it) }
         dishDetailSummary.text = dish.description
         dishDetailInfo.setContributions(contributions)
+
+        val icon = if (dish.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+        movieDetailFavorite.setImageDrawable(getDrawable(icon))
     }
 }
