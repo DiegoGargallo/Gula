@@ -2,7 +2,7 @@ package es.diegogargallotarin.gula
 
 import android.app.Application
 import androidx.room.Room
-import es.diegogargallotarin.gula.model.database.GulaDatabase
+import es.diegogargallotarin.gula.data.database.GulaDatabase
 
 
 class GulaApp : Application() {

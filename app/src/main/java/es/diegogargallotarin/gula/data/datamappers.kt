@@ -1,11 +1,10 @@
-package es.diegogargallotarin.gula.model
+package es.diegogargallotarin.gula.data
 
 import es.diegogargallotarin.domain.Dish
-import es.diegogargallotarin.gula.model.database.Dish as DatabaseDish
-import es.diegogargallotarin.gula.model.server.entity.Dish as ServerDish
+import es.diegogargallotarin.gula.data.database.Dish as DatabaseDish
+import es.diegogargallotarin.gula.data.server.entity.Dish as ServerDish
 import es.diegogargallotarin.domain.Contribution
-import es.diegogargallotarin.gula.model.database.Contribution as DatabaseContribution
-import es.diegogargallotarin.gula.model.server.entity.Contribution as ServerContribution
+import es.diegogargallotarin.gula.data.database.Contribution as DatabaseContribution
 
 
 fun Dish.toRoomDish(): DatabaseDish = DatabaseDish(

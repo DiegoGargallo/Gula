@@ -1,17 +1,14 @@
 package es.diegogargallotarin.gula.ui.main
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import es.diegogargallotarin.domain.Dish
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.databinding.ViewDishBinding
-import es.diegogargallotarin.gula.model.toRoomDish
+import es.diegogargallotarin.gula.data.toRoomDish
 import es.diegogargallotarin.gula.ui.common.bindingInflate
-import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlin.properties.Delegates
-import kotlinx.android.synthetic.main.view_dish.view.*
 
 class DishesAdapter(private val listener: (Dish) -> Unit) :
         RecyclerView.Adapter<DishesAdapter.ViewHolder>() {

@@ -1,14 +1,13 @@
-package es.diegogargallotarin.gula.model.server
+package es.diegogargallotarin.gula.data.server
 
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import es.diegogargallotarin.data.source.RemoteDataSource
 import es.diegogargallotarin.domain.Dish
-import es.diegogargallotarin.gula.model.server.entity.Dish as ServerDish
-import es.diegogargallotarin.gula.model.toDomainDish
+import es.diegogargallotarin.gula.data.server.entity.Dish as ServerDish
+import es.diegogargallotarin.gula.data.toDomainDish
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

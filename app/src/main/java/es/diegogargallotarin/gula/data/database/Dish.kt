@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.model.database
+package es.diegogargallotarin.gula.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

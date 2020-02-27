@@ -1,11 +1,11 @@
-package es.diegogargallotarin.gula.model.database
+package es.diegogargallotarin.gula.data.database
 
 import es.diegogargallotarin.data.source.LocalDataSource
 import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.domain.Dish
-import es.diegogargallotarin.gula.model.toDomainContribution
-import es.diegogargallotarin.gula.model.toDomainDish
-import es.diegogargallotarin.gula.model.toRoomDish
+import es.diegogargallotarin.gula.data.toDomainContribution
+import es.diegogargallotarin.gula.data.toDomainDish
+import es.diegogargallotarin.gula.data.toRoomDish
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

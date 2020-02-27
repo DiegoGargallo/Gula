@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.model.server.entity
+package es.diegogargallotarin.gula.data.server.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

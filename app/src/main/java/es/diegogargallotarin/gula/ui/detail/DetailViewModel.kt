@@ -2,11 +2,11 @@ package es.diegogargallotarin.gula.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import es.diegogargallotarin.gula.model.database.Contribution
-import es.diegogargallotarin.gula.model.database.Dish
-import es.diegogargallotarin.gula.model.toDomainDish
-import es.diegogargallotarin.gula.model.toRoomContribution
-import es.diegogargallotarin.gula.model.toRoomDish
+import es.diegogargallotarin.gula.data.database.Contribution
+import es.diegogargallotarin.gula.data.database.Dish
+import es.diegogargallotarin.gula.data.toDomainDish
+import es.diegogargallotarin.gula.data.toRoomContribution
+import es.diegogargallotarin.gula.data.toRoomDish
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
 import es.diegogargallotarin.usecases.FindContributionsByDishName
 import es.diegogargallotarin.usecases.FindDishByName
