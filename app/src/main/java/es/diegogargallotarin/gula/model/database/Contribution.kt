@@ -11,8 +11,8 @@ import androidx.room.PrimaryKey
 )
 data class Contribution(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    var dishId: String? = null,
-    var photo: String? = null,
-    var user: String? = null,
-    var restaurant: String? = null
+    var dishId: String,
+    var photo: String,
+    var user: String,
+    var restaurant: String
 )

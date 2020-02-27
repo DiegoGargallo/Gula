@@ -2,16 +2,22 @@ package es.diegogargallotarin.gula.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import es.diegogargallotarin.gula.model.database.Contribution
 import es.diegogargallotarin.gula.model.database.Dish
-import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.gula.model.toDomainDish
+import es.diegogargallotarin.gula.model.toRoomContribution
+import es.diegogargallotarin.gula.model.toRoomDish
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
+import es.diegogargallotarin.usecases.FindContributionsByDishName
+import es.diegogargallotarin.usecases.FindDishByName
+import es.diegogargallotarin.usecases.ToggleDishFavorite
 import kotlinx.coroutines.launch
 
 
-class DetailViewModel(private val dishName: String, private val gulaRepository: GulaRepository) : ScopedViewModel() {
+class DetailViewModel(private val dishName: String,
+                      private val findDishByName: FindDishByName,
+                      private val findContributionsByDishName: FindContributionsByDishName,
+                      private val toggleDishFavorite: ToggleDishFavorite) : ScopedViewModel() {
 
     private val _dish = MutableLiveData<Dish>()
     val dish: LiveData<Dish> get() = _dish
@@ -33,8 +39,8 @@ class DetailViewModel(private val dishName: String, private val gulaRepository: 
 
     init {
         launch {
-            _contributions.value = gulaRepository.findContributionsByDishName(dishName)
-            _dish.value = gulaRepository.findDishByName(dishName)
+            _contributions.value = findContributionsByDishName(dishName).map { it.toRoomContribution() }
+            _dish.value = findDishByName(dishName).toRoomDish()
             updateUi()
         }
     }
@@ -42,10 +48,7 @@ class DetailViewModel(private val dishName: String, private val gulaRepository: 
     fun onFavoriteClicked() {
         launch {
             dish.value?.let {
-                val updatedDish = it.copy(favorite = !it.favorite)
-                _dish.value = updatedDish
-                updateUi()
-                gulaRepository.update(updatedDish)
+                toggleDishFavorite.invoke(it.toDomainDish())
             }
         }
     }

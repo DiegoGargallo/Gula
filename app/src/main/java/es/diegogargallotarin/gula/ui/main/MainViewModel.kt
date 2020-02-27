@@ -2,13 +2,13 @@ package es.diegogargallotarin.gula.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import es.diegogargallotarin.gula.model.database.Dish
-import es.diegogargallotarin.gula.model.server.repository.GulaRepository
+import es.diegogargallotarin.domain.Dish
 import es.diegogargallotarin.gula.ui.common.Event
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
+import es.diegogargallotarin.usecases.GetDishes
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val gulaRepository: GulaRepository) : ScopedViewModel() {
+class MainViewModel(private val getDishes: GetDishes) : ScopedViewModel() {
 
     private val _dishes = MutableLiveData<List<Dish>>()
     val dishes: LiveData<List<Dish>> get() = _dishes
@@ -31,7 +31,7 @@ class MainViewModel(private val gulaRepository: GulaRepository) : ScopedViewMode
     private fun refresh() {
         launch {
             _loading.value = true
-            _dishes.value = gulaRepository.getAllDishes()
+            _dishes.value = getDishes.invoke()
             _loading.value = false
         }
     }

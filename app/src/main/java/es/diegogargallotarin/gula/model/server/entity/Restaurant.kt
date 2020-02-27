@@ -1,4 +1,4 @@
-package es.diegogargallotarin.gula.model.entity
+package es.diegogargallotarin.gula.model.server.entity
 
 import com.google.firebase.firestore.GeoPoint
 import android.os.Parcelable

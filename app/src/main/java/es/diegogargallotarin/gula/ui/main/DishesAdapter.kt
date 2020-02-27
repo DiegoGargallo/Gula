@@ -4,9 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import es.diegogargallotarin.domain.Dish
 import es.diegogargallotarin.gula.R
 import es.diegogargallotarin.gula.databinding.ViewDishBinding
-import es.diegogargallotarin.gula.model.database.Dish
+import es.diegogargallotarin.gula.model.toRoomDish
 import es.diegogargallotarin.gula.ui.common.bindingInflate
 import es.diegogargallotarin.gula.ui.common.loadUrl
 import kotlin.properties.Delegates
@@ -37,7 +38,7 @@ class DishesAdapter(private val listener: (Dish) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dish = dishes[position]
-        holder.dataBinding.dish = dish
+        holder.dataBinding.dish = dish.toRoomDish()
         holder.itemView.setOnClickListener { listener(dish) }
     }
 
