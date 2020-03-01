@@ -20,8 +20,7 @@ import es.diegogargallotarin.usecases.GetDishes
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
-
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy { getViewModel { app.component.mainViewModel } }
     private lateinit var adapter: DishesAdapter
 
     private lateinit var navController: NavController
@@ -39,12 +38,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
-
-        viewModel = getViewModel {
-            MainViewModel(
-                GetDishes(GulaRepository(RoomDataSource(app.db),
-                    FirebaseDataSource())
-                )) }
 
         viewModel.navigateToDish.observe(viewLifecycleOwner, EventObserver { name ->
             val action = MainFragmentDirections.actionMainFragmentToDetailFragment(name)

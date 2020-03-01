@@ -21,7 +21,7 @@ import es.diegogargallotarin.usecases.ToggleDishFavorite
 
 class DetailFragment : Fragment() {
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel by lazy { getViewModel { app.component.detaiViewModel } }
     private var binding: FragmentDetailBinding? = null
     private val args: DetailFragmentArgs by navArgs()
 
@@ -35,19 +35,6 @@ class DetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = getViewModel {
-            val gulaRepository = GulaRepository(
-                RoomDataSource(app.db),
-                FirebaseDataSource())
-
-            DetailViewModel(
-                args.name,
-                FindDishByName(gulaRepository),
-                FindContributionsByDishName(gulaRepository),
-                ToggleDishFavorite(gulaRepository)
-            )
-        }
-
         binding?.apply {
             viewmodel = viewModel
             lifecycleOwner = this@DetailFragment
