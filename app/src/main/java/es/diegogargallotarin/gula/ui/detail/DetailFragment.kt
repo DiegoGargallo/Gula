@@ -21,7 +21,10 @@ import es.diegogargallotarin.usecases.ToggleDishFavorite
 
 class DetailFragment : Fragment() {
 
-    private val viewModel by lazy { getViewModel { app.component.detaiViewModel } }
+
+    private lateinit var component: DetailActivityComponent
+    private val viewModel by lazy { getViewModel { component.detaiViewModel } }
+
     private var binding: FragmentDetailBinding? = null
     private val args: DetailFragmentArgs by navArgs()
 
@@ -31,6 +34,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = container?.bindingInflate(R.layout.fragment_detail, false)
+
+        component = app.component.plus(DetailActivityModule(args.name))
         return binding?.root
     }
 

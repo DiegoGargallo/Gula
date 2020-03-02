@@ -20,7 +20,9 @@ import es.diegogargallotarin.usecases.GetDishes
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
-    private val viewModel: MainViewModel by lazy { getViewModel { app.component.mainViewModel } }
+    private lateinit var component: MainActivityComponent
+    private val viewModel: MainViewModel by lazy { getViewModel { component.mainViewModel } }
+
     private lateinit var adapter: DishesAdapter
 
     private lateinit var navController: NavController
@@ -32,6 +34,8 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = container?.bindingInflate(R.layout.fragment_main, false)
+
+        component = app.component.plus(MainActivityModule())
         return binding?.root
     }
 

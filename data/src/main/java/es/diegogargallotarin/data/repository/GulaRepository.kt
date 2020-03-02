@@ -20,7 +20,13 @@ public class GulaRepository(val localDataSource: LocalDataSource,
 
     suspend fun findByName(name: String): Dish = localDataSource.findByName(name)
 
-    suspend fun findContributionsByDishName(name: String): List<Contribution> = localDataSource.findContributionsByDishName(name)
+    suspend fun findContributionsByDishName(name: String): List<Contribution> {
+        if (localDataSource.isDishContributionsEmpty(name)) {
+            val contributions =  remoteDataSource.getContributionsByDishName(name)
+            localDataSource.saveContributions(contributions)
+        }
+        return localDataSource.findContributionsByDishName(name)
+    }
 
     suspend fun update(movie: Dish) = localDataSource.update(movie)
 }

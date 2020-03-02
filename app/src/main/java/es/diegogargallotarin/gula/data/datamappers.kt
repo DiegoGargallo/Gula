@@ -5,6 +5,7 @@ import es.diegogargallotarin.gula.data.database.Dish as DatabaseDish
 import es.diegogargallotarin.gula.data.server.entity.Dish as ServerDish
 import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.gula.data.database.Contribution as DatabaseContribution
+import es.diegogargallotarin.gula.data.server.entity.Contribution as ServerContribution
 
 
 fun Dish.toRoomDish(): DatabaseDish = DatabaseDish(
@@ -38,3 +39,10 @@ fun DatabaseContribution.toDomainContribution(): Contribution = Contribution(
     photo,
     user,
     restaurant)
+
+fun ServerContribution.toDomainContribution(dishName: String): Contribution = Contribution(
+    0,
+    dishName,
+    photo.toString(),
+    user.toString(),
+    restaurant.toString())

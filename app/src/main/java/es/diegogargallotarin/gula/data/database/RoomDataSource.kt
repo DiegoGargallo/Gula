@@ -5,6 +5,7 @@ import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.domain.Dish
 import es.diegogargallotarin.gula.data.toDomainContribution
 import es.diegogargallotarin.gula.data.toDomainDish
+import es.diegogargallotarin.gula.data.toRoomContribution
 import es.diegogargallotarin.gula.data.toRoomDish
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,6 +23,10 @@ class RoomDataSource (db: GulaDatabase) : LocalDataSource {
         withContext(Dispatchers.IO) { dishDao.insertDishes(dishes.map { it.toRoomDish() }) }
     }
 
+    override suspend fun saveContributions(contributions: List<Contribution>) {
+        withContext(Dispatchers.IO) { contributionDao.insertContributions(contributions.map { it.toRoomContribution() }) }
+    }
+
     override suspend fun getAllDishes(): List<Dish> = withContext(Dispatchers.IO) {
         dishDao.getAll().map { it.toDomainDish() }
     }
@@ -30,8 +35,12 @@ class RoomDataSource (db: GulaDatabase) : LocalDataSource {
         dishDao.findByName(name).toDomainDish()
     }
 
+    override suspend fun isDishContributionsEmpty(name: String): Boolean = withContext(Dispatchers.IO) {
+        contributionDao.contributionCount(name) <= 0
+    }
+
     override suspend fun findContributionsByDishName(name: String): List<Contribution> = withContext(Dispatchers.IO) {
-        contributionDao.findContributionsByDishName(name).map { it.toDomainContribution() }.toMutableList();
+        contributionDao.findContributionsByDishName(name).map { it.toDomainContribution() }.toMutableList()
     }
 
     override suspend fun update(dish: Dish) {

@@ -3,16 +3,20 @@ package es.diegogargallotarin.gula.di
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import es.diegogargallotarin.gula.ui.detail.DetailActivityComponent
+import es.diegogargallotarin.gula.ui.detail.DetailActivityModule
 import es.diegogargallotarin.gula.ui.detail.DetailViewModel
+import es.diegogargallotarin.gula.ui.main.MainActivityComponent
+import es.diegogargallotarin.gula.ui.main.MainActivityModule
 import es.diegogargallotarin.gula.ui.main.MainViewModel
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, DataModule::class, UseCaseModule::class, ViewModelsModule::class])
+@Component(modules = [AppModule::class, DataModule::class])
 interface GulaComponent {
 
-    val mainViewModel: MainViewModel
-    val detaiViewModel: DetailViewModel
+    fun plus(module: MainActivityModule): MainActivityComponent
+    fun plus(module: DetailActivityModule) : DetailActivityComponent
 
     @Component.Factory
     interface Factory {
