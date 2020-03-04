@@ -39,7 +39,7 @@ class RoomDataSource (db: GulaDatabase) : LocalDataSource {
         contributionDao.contributionCount(name) <= 0
     }
 
-    override suspend fun findContributionsByDishName(name: String): List<Contribution> = withContext(Dispatchers.IO) {
+    override suspend fun getContributionsByDishName(name: String): List<Contribution> = withContext(Dispatchers.IO) {
         contributionDao.findContributionsByDishName(name).map { it.toDomainContribution() }.toMutableList()
     }
 
