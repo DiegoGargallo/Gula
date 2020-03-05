@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import es.diegogargallotarin.data.source.LocalDataSource
 import es.diegogargallotarin.data.source.RemoteDataSource
-import es.diegogargallotarin.domain.Contribution
-import es.diegogargallotarin.domain.Dish
+import es.diegogargallotarin.testshared.mockedContribution
+import es.diegogargallotarin.testshared.mockedDish
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -112,19 +112,4 @@ class GulaRepositoryTest {
             verify(localDataSource).update(dish)
         }
     }
-
-    private val mockedDish = Dish(
-        "Pasta",
-        "Pasta dish",
-        "https://upload.wikimedia.org/wikipedia/commons/f/fc/Strozzapreti_Pasta.JPG",
-        true
-    )
-
-    private val mockedContribution = Contribution(
-        0,
-        "Pasta",
-        "https://upload.wikimedia.org/wikipedia/commons/f/fc/Strozzapreti_Pasta.JPG",
-        "User 1",
-        "Restaurant 1"
-    )
 }

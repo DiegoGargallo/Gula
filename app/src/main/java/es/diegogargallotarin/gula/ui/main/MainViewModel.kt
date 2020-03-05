@@ -6,9 +6,12 @@ import es.diegogargallotarin.domain.Dish
 import es.diegogargallotarin.gula.ui.common.Event
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
 import es.diegogargallotarin.usecases.GetDishes
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getDishes: GetDishes) : ScopedViewModel() {
+class MainViewModel(private val getDishes: GetDishes,
+                    uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private val _dishes = MutableLiveData<List<Dish>>()
     val dishes: LiveData<List<Dish>> get() = _dishes
@@ -28,7 +31,7 @@ class MainViewModel(private val getDishes: GetDishes) : ScopedViewModel() {
         _navigateToDish.value = Event(dish.name)
     }
 
-    private fun refresh() {
+    fun refresh() {
         launch {
             _loading.value = true
             _dishes.value = getDishes.invoke()

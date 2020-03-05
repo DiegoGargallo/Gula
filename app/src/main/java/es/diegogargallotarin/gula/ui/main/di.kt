@@ -5,13 +5,15 @@ import dagger.Provides
 import dagger.Subcomponent
 import es.diegogargallotarin.data.repository.GulaRepository
 import es.diegogargallotarin.usecases.GetDishes
+import kotlinx.coroutines.CoroutineDispatcher
 
 
 @Module
 class MainActivityModule {
 
     @Provides
-    fun mainViewModelProvider(getDishes: GetDishes) = MainViewModel(getDishes)
+    fun mainViewModelProvider(getDishes: GetDishes,
+                              uiDispatcher: CoroutineDispatcher) = MainViewModel(getDishes, uiDispatcher)
 
     @Provides
     fun getPopularMoviesProvider(gulaRepository: GulaRepository) =

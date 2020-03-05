@@ -2,22 +2,24 @@ package es.diegogargallotarin.gula.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import es.diegogargallotarin.gula.data.database.Contribution
+import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.gula.data.database.Dish
 import es.diegogargallotarin.gula.data.toDomainDish
-import es.diegogargallotarin.gula.data.toRoomContribution
 import es.diegogargallotarin.gula.data.toRoomDish
 import es.diegogargallotarin.gula.ui.common.ScopedViewModel
 import es.diegogargallotarin.usecases.FindContributionsByDishName
 import es.diegogargallotarin.usecases.FindDishByName
 import es.diegogargallotarin.usecases.ToggleDishFavorite
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 
 class DetailViewModel(private val dishName: String,
                       private val findDishByName: FindDishByName,
                       private val findContributionsByDishName: FindContributionsByDishName,
-                      private val toggleDishFavorite: ToggleDishFavorite) : ScopedViewModel() {
+                      private val toggleDishFavorite: ToggleDishFavorite,
+                      override val uiDispatcher: CoroutineDispatcher
+) : ScopedViewModel(uiDispatcher) {
 
     private val _dish = MutableLiveData<Dish>()
     val dish: LiveData<Dish> get() = _dish
@@ -38,8 +40,12 @@ class DetailViewModel(private val dishName: String,
     val favorite: LiveData<Boolean> get() = _favorite
 
     init {
+        refresh()
+    }
+
+    fun refresh() {
         launch {
-            _contributions.value = findContributionsByDishName(dishName).map { it.toRoomContribution() }
+            _contributions.value = findContributionsByDishName(dishName)
             _dish.value = findDishByName(dishName).toRoomDish()
             updateUi()
         }

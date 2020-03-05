@@ -7,6 +7,7 @@ import es.diegogargallotarin.data.repository.GulaRepository
 import es.diegogargallotarin.usecases.FindContributionsByDishName
 import es.diegogargallotarin.usecases.FindDishByName
 import es.diegogargallotarin.usecases.ToggleDishFavorite
+import kotlinx.coroutines.CoroutineDispatcher
 
 
 @Module
@@ -16,9 +17,10 @@ class DetailActivityModule(private val dishName: String) {
     fun detailViewModelProvider(
         findDishByName: FindDishByName,
         findContributionsByDishName: FindContributionsByDishName,
-        toggleDishFavorite: ToggleDishFavorite
+        toggleDishFavorite: ToggleDishFavorite,
+        uiDispatcher: CoroutineDispatcher
     ): DetailViewModel {
-        return DetailViewModel(dishName,findDishByName, findContributionsByDishName, toggleDishFavorite)
+        return DetailViewModel(dishName,findDishByName, findContributionsByDishName, toggleDishFavorite, uiDispatcher)
     }
 
     @Provides

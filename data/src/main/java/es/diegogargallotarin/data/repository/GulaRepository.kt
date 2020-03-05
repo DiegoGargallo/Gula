@@ -5,8 +5,8 @@ import es.diegogargallotarin.data.source.RemoteDataSource
 import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.domain.Dish
 
-public class GulaRepository(val localDataSource: LocalDataSource,
-                            val remoteDataSource: RemoteDataSource
+class GulaRepository(val localDataSource: LocalDataSource,
+                     val remoteDataSource: RemoteDataSource
 ) {
 
     suspend fun getAllDishes() :  List<Dish> {

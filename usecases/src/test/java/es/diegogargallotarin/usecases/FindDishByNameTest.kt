@@ -28,12 +28,12 @@ class FindDishByNameTest {
     fun `invoke calls gula repository`() {
         runBlocking {
 
-            val movie = mockedDish.copy(name = "Pasta")
-            whenever(gulaRepository.findByName("Pasta")).thenReturn(movie)
+            val dish = mockedDish.copy(name = "Pasta")
+            whenever(gulaRepository.findByName("Pasta")).thenReturn(dish)
 
             val result = findDishByName.invoke("Pasta")
 
-            Assert.assertEquals(movie, result)
+            Assert.assertEquals(dish, result)
         }
     }
 }

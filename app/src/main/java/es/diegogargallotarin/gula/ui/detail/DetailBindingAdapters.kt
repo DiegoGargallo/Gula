@@ -5,8 +5,8 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.databinding.BindingAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import es.diegogargallotarin.domain.Contribution
 import es.diegogargallotarin.gula.R
-import es.diegogargallotarin.gula.data.database.Contribution
 
 @BindingAdapter("contributions")
 fun TextView.updateDishDetails(contributionsList: List<Contribution>?) = contributionsList?.run {

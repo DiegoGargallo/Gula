@@ -28,12 +28,12 @@ class GetDishesTest {
     fun `invoke calls gula repository`() {
         runBlocking {
 
-            val movies = listOf(mockedDish.copy(name = "Pasta"))
-            whenever(gulaRepository.getAllDishes()).thenReturn(movies)
+            val dishes = listOf(mockedDish.copy(name = "Pasta"))
+            whenever(gulaRepository.getAllDishes()).thenReturn(dishes)
 
             val result = getDishes.invoke()
 
-            Assert.assertEquals(movies, result)
+            Assert.assertEquals(dishes, result)
         }
     }
 }

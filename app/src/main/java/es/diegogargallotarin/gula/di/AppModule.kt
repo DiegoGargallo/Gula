@@ -9,6 +9,9 @@ import es.diegogargallotarin.data.source.RemoteDataSource
 import es.diegogargallotarin.gula.data.database.GulaDatabase
 import es.diegogargallotarin.gula.data.database.RoomDataSource
 import es.diegogargallotarin.gula.data.server.FirebaseDataSource
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
@@ -27,4 +30,7 @@ class AppModule {
 
     @Provides
     fun remoteDataSourceProvider(): RemoteDataSource = FirebaseDataSource()
+
+    @Provides
+    fun coroutineDispatcherProvider(): CoroutineDispatcher = Dispatchers.Main
 }
